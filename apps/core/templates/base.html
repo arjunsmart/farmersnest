@@ -4,7 +4,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{% block title %}{% endblock %}Saul Gadgets</title>
+		<title>{% block title %}{% endblock %}Farmers Nest</title>
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
 		<link rel="stylesheet" href="{% static 'main.css' %}">
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -13,13 +14,16 @@
 	<body>
 		<nav class="navbar is-dark" id="navbarapp">
 			<div class="navbar-brand">
-				<a class="navbar-item" href="{% url 'frontpage' %}">Saul Gadgets</a>
+				<a class="navbar-item" href="{% url 'frontpage' %}"><span class="mr-2">Farmer's </span> Nest</a>
 
 				<a @click="toggleMenu()" role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="main-navbar">
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
 				</a>
+				<div class="navbar-item">
+					<a href="{% url 'cart' %}" class="button is-primary"><i class="fa fa-shopping-basket"></i>Cart ([[ numItems ]])</a>
+				</div>
 			</div>
 
 			<div id="main-navbar" class="navbar-menu" :class="{ 'is-active': menuClass }">
@@ -31,13 +35,43 @@
 									<input type="text" class="input" placeholder="Search..." name="query">
 								</div>
 								<div class="control">
-									<button class="button is-success">Search</button>
+									<button class="button is-primary"><i class="fa fa-search"></i></button>
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
+			<div class="navbar-item">
+
+				<article>
+					<p>
+						Coupons:
+						
+						<span class="flash" data-flash-spped="1000">				
+							{% for coupon in menu_coupons %}
+							<span><i class="fa fa-opencart"></i>{{ coupon.code }}</span>
+							{% endfor %}
+							<!--span>FIRST20</span>
+							<span>REF20</span>
+							<span>All5</span-->
+						</span>
+					</p>
+				</article>
+					
+		   </div><div class="navbar-end">
+			<div class="navbar-item has-dropdown is-hoverable">
+				<a class="navbar-link">
+				  Categories
+				</a>
+		
+				<div class="navbar-dropdown">
+				  {% for category in menu_categories %}
+					  <a href="{% url 'category_detail' category.slug %}" class="navbar-item is-dark is-capitalized">{{ category.title }}</a>
+				  {% endfor %}					
+				</div>
+			  </div>
 				<div class="navbar-end">
+					<!--div>
 					{% for category in menu_categories %}
 						{% if not category.children.all %}
                         	<a href="{% url 'category_detail' category.slug %}" class="navbar-item">{{ category.title }}</a>
@@ -53,14 +87,13 @@
 							</div>
 						{% endif %}		
 					{% endfor %}
+					</div-->
 					
-					<div class="navbar-item">
-						<a href="{% url 'cart' %}" class="button is-primary">Cart ([[ numItems ]])</a>
-					</div>
+					
 
 					{% if request.user.is_authenticated %}
 						<div class="navbar-item">
-							<a href="{% url 'myaccount' %}" class="button is-light">My account</a>
+							<a href="{% url 'myaccount' %}" class="button is-light"><i class="fa fa-user"></i>My account</a>
 						</div>
 					{% else %}
 						<div class="navbar-item">
@@ -81,19 +114,57 @@
 
 		{% include 'parts/newsletter.html' %}
 
-		<footer class="footer">
-			<div class="columns">
-				<div class="column is-4">
-					<h2 class="subtitle">Saul Gadgets</h2>
-				</div>
+		
+		
+		  <div class="footer">
+			  <div class="footer-content">
+				  <div class="footer-section about">
+					  <h1 class="title logo-text"><span class="mr-2">Farmer's</span>Nest</h1>
+					  <p>
+						  Lorem ipsum dolor sit amet, 
+						 
+					  </p>
+					  <div class="contact">
+					  <span><i class="fa fa-phone"></i>&nbsp; +91 1111111111</span>
+					  <span><i class="fa fa-envelope"></i>&nbsp; info@myfarmersnest.com</span>
+					</div>
+					<div class="socials">
+						<a href=""><i class="fa fa-twitter-square"></i></a>
+						<a href=""><i class="fa fa-facebook-square"></i></a>
+						<a href=""><i class="fa fa-linkedin-square"></i></a> 
+						<a href=""><i class="fa fa-youtube-square"></i></a> 
 
-				<div class="column is-8">
-					<a href="{% url 'contact' %}" class="navbar-item">Contact</a>
-					<a href="{% url 'about' %}" class="navbar-item">About</a>
-				</div>
-			</div>
-		</footer>
-
+					</div>
+				  </div>
+				  <div class="footer-section links">
+					<h1 class="title" >Quick Links</h1>
+					  <ul>
+					  <a href="/"><li>Home</li></a>
+					  <a href="{% url 'about' %}""><li>About</li></a>
+					  <a href="{% url 'contact' %}"><li>Contact</li></a>
+					  <a href=""><li>Terms and Conditions</li></a>
+					  <a href=""><li>Privecy Policy</li></a>
+					</ul>
+				  </div>
+				  <div class="footer-section contact-form">
+					  <h1 class="title">Contact Us</h1>
+					  <form action="." method="">
+						  <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
+						  <textarea name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
+						  <button type="submit" class="btn btn-big contact-btn">
+							<i class="fa fa-envelope"></i>  
+							Send</button>
+					  </form>
+				  </div>
+				  <div class="footer-bottom">
+					 All rights reserved &copy; myfarmersnest.com 2020
+					  
+				  </div>
+			  </div>
+		  </div>
+		
+			
+		
 		<script src="https://unpkg.com/vuex@3.5.1/dist/vuex.js"></script>
 		<script>
 			var store = new Vuex.Store({
@@ -137,5 +208,7 @@
 
 		{% block scripts %}
 		{% endblock %}
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="{% static 'main.js' %}"></script>
 	</body>
 </html>

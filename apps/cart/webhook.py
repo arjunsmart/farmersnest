@@ -32,6 +32,6 @@ def webhook(request):
         order.save()
 
         decrement_product_quantity(order)  
-        send_order_confirmation(order)
+       # send_order_confirmation(order)
         
     return HttpResponse(status=200)

@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %}{{ product.title }} | {% endblock %}
 
 {% block content %}
+<div class="container">
     <div id="productapp">
-        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <nav class="breadcrumb is-capitalized" aria-label="breadcrumbs">
             <ul>
                 <li><a href="{% url 'frontpage' %}">Home</a></li>
                 {% if product.category.parent %}
@@ -16,36 +18,35 @@
         </nav>
 
         <div class="columns">
-            <div class="column is-4">
-                <figure class="image is-4by3">
+            <div class="column">
+                <div class="main-image card">
                     <img :src="mainImage">
-                </figure>
-            </div>
-        </div>
-
-        {% if product.images.all %}
-            <hr>
-            <div class="columns">
-                <div class="column is-2" v-for="image in images">
-                    <figure class="image is-128x128">
-                        <img :src="image.thumbnail" @click="changeMainImage(image.image)">
-                    </figure>
                 </div>
-            </div>
-        {% endif %}
+            <br>
+        
+
+        
+    </div>
+    
         <hr>
+        <div class="column">
+            <div style="text-align: center;">
         <h1 class="title">{{ product.title }}</h1>
-        <h2 class="subtitle">${{ product.price }}, Stars: {% if product.get_rating == 0 %}No ratings yet{% else %}{{ product.get_rating|floatformat:1 }}{% endif %}</h2>
+        <h2 class="subtitle">₹{{ product.price|intcomma }} </h2>
+    <p><i class="fa fa-star"></i>Ratings : {% if product.get_rating == 0 %}No ratings yet{% else %}{{ product.get_rating|floatformat:1 }}/5.0{% endif %}
+     <span><div class="views"><i class="fa fa-eye"></i> {{ product.num_visits}}</div></span></p>
+
 
         {% if product.description %}
-            <p>{{ product.description }}</p>
+            <p class="is-capitalized mb-2">Desc :{{ product.description }}</p>
         {% endif %}
 
-        <h2 class="subtitle">Add to cart</h2>
+        
+    </div>
+    
 
         {% if product.variants.all %}
-            <div class="columns">
-                <div class="column is-6">
+            
                     <table class="table is-fullwidth">
                         <tbody>
                             <tr>
@@ -57,16 +58,16 @@
                                     </figure>
                                 </td>
 
-                                <td>
+                                <td class="is-capitalized">
                                     {{ product.title }}
                                 </td>
 
                                 <td>
                                     {% if product.in_cart %}
-                                        <p>Already in cart!</p>
+                                        <button class="button is-warning">In Cart</button>
                                     {% else %}
                                         {% if product.num_available > 0 %}
-                                            <button @click="addToCart({{ product.id }})" class="button is-success">Add to cart</button>
+                                            <button @click="addToCart({{ product.id }})" class="button is-success has-text-centered"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                                         {% else %}
                                             <p>The product is out of stock!</p>
                                         {% endif %}
@@ -84,16 +85,16 @@
                                         </figure>
                                     </td>
 
-                                    <td>
+                                    <td class="is-capitalized">
                                         {{ variant.title }}
                                     </td>
 
                                     <td>
                                         {% if variant.in_cart %}
-                                            <p>Already in cart!</p>
+                                        <button class="button is-warning">In Cart</button>
                                         {% else %}
                                             {% if variant.num_available > 0 %}
-                                                <button @click="addToCart({{ variant.id }})" class="button is-success">Add to cart</button>
+                                                <button @click="addToCart({{ variant.id }})" class="button is-success has-text-centered"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                                             {% else %}
                                                 <p>The product is out of stock!</p>
                                             {% endif %}
@@ -106,24 +107,38 @@
                 </div>
             </div>
         {% else %}
+        <div class="" style="text-align: center;">
             {% if product.in_cart %}
-                <p>Already in cart!</p>
+                <p class="button is-warning">In Cart</p>
             {% else %}
                 {% if product.num_available > 0 %}
-                    <button @click="addToCart({{ product.id }})" class="button is-success">Add to cart</button>
+                    <button  style="text-align: center;" @click="addToCart({{ product.id }})" class="button is-success"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                 {% else %}
                     <p>The product is out of stock!</p>
                 {% endif %}
             {% endif %}
         {% endif %}
+    </div>
 
         <article class="message is-success" v-if="showMessage">
             <div class="message-body">
                 The product was added to the cart!
             </div>
         </article>
+    </div>
+</div>
+{% if product.images.all %}
+            
+            <div class="columns is-mobile">
+                <div class="column is-2" v-for="image in images">
+                    <figure class="image card">
+                        <img :src="image.thumbnail" @click="changeMainImage(image.image)">
+                    </figure>
+                </div>
+            </div>
+        {% endif %}
 
-        <hr>
+        
 
         <h2 class="subtitle">Related products</h2>
 
@@ -140,7 +155,7 @@
                 <div class="notification space-below">
                     <p>
                         <strong>Date: </strong>{{ review.date_added|date:"Y-m-d" }},
-                        <strong>Stars: </strong>{{ review.stars }}
+                        <strong><i class="fa fa-star"></i> </strong>{{ review.stars }}/5
                     </p>
 
                     {{ review.content }}
@@ -188,10 +203,12 @@
                     </div>
                 </form>
             {% else %}
-                <p>Please sign in to add review!</p>
+            <p>Please sign Up to add review !<a href="{% url 'login' %}"> log in</a> / <a href="{% url 'signup' %}">sign up</a>.</p>
             {% endif %}
         </div>
     </div>
+
+</div>
 {% endblock %}
 
 {% block scripts %}

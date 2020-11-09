@@ -1,24 +1,24 @@
 #!/bin/sh
 
-NAME='saulgadgets'
-DJANGODIR=/saulroot/saul_3_6_4/saulgadgets
-SOCKFILE=/saulroot/saul_3_6_4/run/gunicorn.sock
-USER=sauluser
-GROUP=saulgroup
+NAME='farmersnest'
+DJANGODIR=/nestroot/nest_3_6_4/farmersnest
+SOCKFILE=/nestroot/nest_3_6_4/run/gunicorn.sock
+USER=nestuser
+GROUP=nestgroup
 NUM_WORKERS=3
-DJANGO_SETTINGS_MODULE=saulgadgets.settingsprod
-DJANGO_WSGI_MODULE=saulgadgets.wsgi
+DJANGO_SETTINGS_MODULE=farmersnest.settingsprod
+DJANGO_WSGI_MODULE=farmersnest.wsgi
 TIMEOUT=120
 
 cd $DJANGODIR
-source ../bin/activate
+source /nestroot/nest_3_6_4/bin/activate
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
 
 RUNDIR=$(dirname $SOCKFILE)
 test -d $RUNDIR || mkdir -p $RUNDIR
 
-exec ../bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
+exec /nestroot/nest_3_6_4/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --name $NAME \
   --workers $NUM_WORKERS \
   --timeout $TIMEOUT \

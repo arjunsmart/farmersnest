@@ -7,14 +7,18 @@ For more information on this file, see
 https://docs.djangoproject.com/en/3.1/topics/settings/
 
 For the full list of settings and their values, see
-https://docs.djangoproject.com/en/3.1/ref/settings/
-"""
+https://docs.djangoproject.com/en/3.1/ref/settings/"""
 
-STRIPE_API_KEY_PUBLISHABLE = "pk_test_51HIHiuKBJV2qfWbD2gQe6aqanfw6Eyul5P02KeOuSR1UMuaV4TxEtaQyzr9DbLITSZweL7XjK3p74swcGYrE2qEX00Hz7GmhMI"
-STRIPE_API_KEY_HIDDEN = "sk_test_51HIHiuKBJV2qfWbD4I9pAODack7r7r9LJOY65zSFx7jUUwgy2nfKEgQGvorv1p2xP7tgMsJ5N9EW7K1lBdPnFnyK00kdrS27cj"
+RAZORPAY_API_KEY_PUBLISHABLE = 'rzp_test_yXRx5KMNXszyBZ'
+RAZORPAY_API_KEY_HIDDEN = 'M7UOx3sp90nOyppE1I0sJBo3'
 
-RAZORPAY_API_KEY_PUBLISHABLE = "rzp_test_Wj7ujrjP6ULkuq"
-RAZORPAY_API_KEY_HIDDEN = "WT8djoNtYSAzA28BrhryFL0f"
+"""RAZORPAY_API_KEY_PUBLISHABLE = 'rzp_live_JDdaFFEnzl5E0k'
+RAZORPAY_API_KEY_HIDDEN = '1tRyttAAMjU3MjtQjrv48RaM"""
+
+#Stripe Credentials
+
+STRIPE_API_KEY_PUBLISHABLE = 'pk_test_51HExIMKDElO4WcAHfqjndMm4KvMfCTIikx1gCAaHs2sKNe9jLkAnxEKPnGpppHr093cwO9FwhsGrxnk4nFhiXUJj00gHy36hXk'
+STRIPE_API_KEY_HIDDEN = 'sk_test_51HExIMKDElO4WcAHQz4emdMtWFygfDJxq73kL0clriKKj650kl1s2UNwXnlPg7dAwvyIfMCaGPFb4MTVt97VumYC009JAUDZZ9'
 
 PAYPAL_API_KEY_PUBLISHABLE = "Ab5gaq5YlFHQTAgbcIW79GV4wE7ObsefiPyNMNV87z1-2JzdNhHpOfGKIduOM1qItLgLI3eA2Z3PIHLw"
 PAYPAL_API_KEY_HIDDEN = "aEKFH985N2oOIFWOeS7rdq2Nht6CdztTVDDjDuQCMIBKcAbjyL-Z3ZY9DeznZSaFbQTp1H4o7CrxgwjX4x"
@@ -60,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     'apps.cart',
     'apps.coupon',

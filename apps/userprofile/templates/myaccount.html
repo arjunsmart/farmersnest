@@ -12,7 +12,7 @@
     <p><strong>Name: </strong>{{ request.user.get_full_name }}</p>
     <p><strong>E-mail: </strong>{{ request.user.email }}</p>
     <p><strong>Address: </strong>{{ request.user.userprofile.address }}</p>
-    <p><strong>Zip and place: </strong>{{ request.user.userprofile.zipcode }} {{ request.user.userprofile.place }}</p>
+    <p><strong>Pincode and place: </strong>{{ request.user.userprofile.place }} {{ request.user.userprofile.zipcode }} </p>
     <p><strong>Phone: </strong>{{ request.user.userprofile.phone }}</p>
 
     <hr>
@@ -20,7 +20,7 @@
     <h2 class="subtitle">My orders</h2>
 
     {% for order in request.user.orders.all %}
-        <article class="message is-light">
+        <article class="message is-grey">
             <div class="message-header">
                 <p>{{ order.created_at }}</p>
                 <p><strong>Status: </strong>{{ order.status }}</p>

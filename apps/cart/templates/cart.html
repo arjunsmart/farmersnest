@@ -3,14 +3,27 @@
 {% block title %}Cart | {% endblock %}
 
 {% block content %}
+<div class="container">
     <div id="cartapp">
-        <h1 class="title">Cart</h1>
+    <div class="columns ">           
+        <div class="column is-5 ">           
+                      
+        <a href="{% url 'frontpage' %}" class="button is-info"><i class="fa fa-long-arrow-left"></i>
+            Continue Shopping</a>
+            </div>
+            <div class="column is-6">
+            <h1 class="title" >Cart</h1>
+        </div>
+    </div>
+    <div class="columns">
+        <div class="column box mr-2"> 
+            <h2 class="subtitle has-text-centered">Cart Details</h2>     
 
         {% if cart %}
             <div v-if="products.length > 0">
                 <div class="table">
-                    <table class="table is-fullwidth is-striped">
-                        <thead>
+                    <table class="table is-striped is-fullwidth">
+                        <thead class="is-centered">
                             <th></th>
                             <th>Product</th>
                             <th>Quantity</th>
@@ -19,7 +32,7 @@
                         </thead>
 
                         <tbody>
-                            <tr v-for="product in products">
+                            <tr  class="mb-2" v-for="product in products">
                                 <td>
                                     <figure class="image is-48x48">
                                         <img :src="product.thumbnail">
@@ -32,7 +45,8 @@
                                 </td>
                                 <td><button @click="decrementQuantity(product.id, product.quantity, product.price)">-</button> [[ product.quantity ]] <button @click="incrementQuantity(product.id, product.quantity, product.price)">+</button></td>
                                 <td>[[ product.total_price ]]</td>
-                                <td><button @click="removeFromCart(product.id)" class="button is-danger">Remove</button></td>
+                                
+                                <td><button @click="removeFromCart(product.id)" class="button is-danger"><i class="fa fa-trash"></i></button></td>
                             </tr>
                         </tbody>
 
@@ -42,6 +56,7 @@
                                 <td>[[ numItems ]]</td>
                                 <td></td>
                                 <td>[[ totalCost ]]</td>
+                                <td></td>
                             </tr>
 
                             <tr v-if="coupon_value">
@@ -79,16 +94,20 @@
 
                     <hr>
                 {% endif %}
+            </div>
+                </div>                
+                <div class="column box mr-2">
 
-                <h2 class="title">Contact information</h2>
+                <h2 class="subtitle has-text-centered">Contact information</h2>
 
                 <div class="columns">
+                    
                     <div class="column is-6">
                         <div class="field">
                             <label>First name</label>
     
                             <div class="control">
-                                <input class="input" type="text" name="first_name" v-model="first_name">
+                                <input class="input" type="text" name="first_name" v-model="first_name" required>
                             </div>
                         </div>
     
@@ -96,7 +115,7 @@
                             <label>Last name</label>
     
                             <div class="control">
-                                <input class="input" type="text" name="last_name" v-model="last_name">
+                                <input class="input" type="text" name="last_name" v-model="last_name" required>
                             </div>
                         </div>
     
@@ -104,7 +123,7 @@
                             <label>E-mail</label>
     
                             <div class="control">
-                                <input class="input" type="email" name="email" v-model="email">
+                                <input class="input" type="email" name="email" v-model="email" required>
                             </div>
                         </div>
     
@@ -112,7 +131,7 @@
                             <label>Phone</label>
     
                             <div class="control">
-                                <input class="input" type="text" name="phone" v-model="phone">
+                                <input class="input" type="text" name="phone" v-model="phone" required>
                             </div>
                         </div>
                     </div>
@@ -122,15 +141,15 @@
                             <label>Address</label>
     
                             <div class="control">
-                                <input class="input" type="text" name="address" v-model="address">
+                                <input class="input" type="text" name="address" v-model="address" required>
                             </div>
                         </div>
     
                         <div class="field">
-                            <label>Zip code</label>
+                            <label>Pin code</label>
     
                             <div class="control">
-                                <input class="input" type="text" name="zipcode" v-model="zipcode">
+                                <input class="input" type="text" name="zipcode" v-model="zipcode" required>
                             </div>
                         </div>
     
@@ -138,45 +157,46 @@
                             <label>Place</label>
     
                             <div class="control">
-                                <input class="input" type="text" name="place" v-model="place">
+                                <input class="input" type="text" name="place" v-model="place" required>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="field">
-                    <div class="control">
-                        <button class="button is-primary" v-on:click="buy('stripe')">Pay with stripe</button>
-                        <button class="button is-primary" v-on:click="buy('razorpay')">Pay with razorpay</button>
-                    
-                        <div id="paypal-button-container" class="mt-4"></div>
+                    <div class="control has-text-centered ">
+                        
+                        <!--button class="button is-primary is-hidden" v-on:click="buy('stripe')">Pay with stripe</button-->
+                        <button   class="button is-primary " v-on:click="buy('razorpay')">Pay with razorpay</button>
                     </div>
                 </div>
+                <div v-if="errors.length > 0">
+                    <article class="message is-warning"
+                        v-for="error in errors">
+                        
+                        <div class="message-body">
+                            [[ error ]]
+                        </div>
+                    </article>
+                </div>
+
+
             </div>
             <p v-else>Your cart is empty!</p>
         {% else %}
             <p>Your cart is empty!</p>
         {% endif %}
 
-        <div v-if="errors.length > 0">
-            <article class="message is-danger"
-                v-for="error in errors"
-            >
-                <div class="message-header">
-                    <p>Error</p>
-                </div>
-                <div class="message-body">
-                    [[ error ]]
-                </div>
-            </article>
-        </div>
-    </div>
+        
+    
+</div>
+</div>
+</div>
 {% endblock %}
 
 {% block scripts %}
 <script type="application/javascript" src="https://js.stripe.com/v3/"></script>
 <script type="application/javascript" src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script type="application/javascript" src="https://www.paypal.com/sdk/js?client-id={{ pub_key_paypal }}"></script>
 <script>
     var productapp = new Vue({
         el: '#cartapp',
@@ -197,61 +217,6 @@
                 coupon_code: '',
                 showCouponCodeError: false
             }
-        },
-        mounted() {
-            const amount = this.totalCostWithCoupon.toString();
-
-            paypal.Buttons({
-                onClick: () => {
-                    if (this.validateForm() > 0) {
-                        return false;
-                    }
-                },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: amount
-                            }
-                        }]
-                    })
-                },
-                onApprove: (data, actions) => {
-                    const formdata = {
-                        'first_name': this.first_name,
-                        'last_name': this.last_name,
-                        'email': this.email,
-                        'address': this.address,
-                        'zipcode': this.zipcode,
-                        'place': this.place,
-                        'phone': this.phone,
-                        'coupon_code': this.coupon_code,
-                        'gateway': 'paypal',
-                        'order_id': data.orderID
-                    };
-
-                    return actions.order.capture().then(function(details) {
-                        fetch('/api/create_checkout_session/', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRFToken': '{{ csrf_token }}'
-                            },
-                            credentials: 'same-origin',
-                            body: JSON.stringify(formdata)
-                        })
-                        .then(function(response) {
-                            return response.json()
-                        })
-                        .then(function(result) {
-                            window.location.href = '/cart/success/';
-                        })
-                        .catch(function(error) {
-                            console.log('error:', error);
-                        });
-                    });
-                }
-            }).render('#paypal-button-container');
         },
         computed: {
             numItems: function() {
@@ -384,8 +349,8 @@
                                 'key': '{{ pub_key_razorpay }}',
                                 'amount': amount,
                                 'currency': 'INR',
-                                'name': 'Saul Gadgets',
-                                'description': 'A cool gadget store',
+                                'name': 'Farmers Nest',
+                                'description': 'A Organic Store',
                                 'order_id': order_id,
                                 'handler': function(res) {
                                     console.log('Handler');
@@ -551,4 +516,8 @@
         }
     });
 </script>
+
+
+
+
 {% endblock %}
