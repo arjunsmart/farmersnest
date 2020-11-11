@@ -9,19 +9,18 @@
                     </figure>
                 </div>
                 
-                <div class="card-content">
-                    <div class="">
-                        <div class="content">
+                
+                        <div class="card-content">
                             <p class="title is-5 is-capitalized">{{ p.title }}</p>
-                            <p class="subtitle is-6">₹{{ p.price }}</p>
+                            <p class="subtitle is-6">₹ {{ p.price }}</p>
                             {% if p.num_available > 0 %}
                                             <p>Available</p>
                                         {% else %}
                                             <p> No Stock</p>
                                         {% endif %}
                         </div>
-                    </div>
-                </div>
+                    
+                
 
                 <!--footer class="card-footer">
                     
@@ -31,3 +30,39 @@
         </div>
     {% endfor %}
 </div>
+
+<!--div class="columns is-multiline is-mobile">
+    {% for p in list_products %}
+    <div class="column is-2-desktop is-6-mobile">
+    <div class="card products-single fix">
+        <div class="box-img-hover">
+            <div class="type-lb">
+                {% if p.num_available > 0 %}
+                                            <p class="sale">Available</p>
+                                        {% else %}
+                                            <p class="sale"> No Stock</p>
+                                        {% endif %}
+            </div>
+            <img src="{{ p.get_thumbnail }}" class="img-fluid" alt="Image">
+            <div class="mask-icon">
+                <ul>
+                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i
+                                class="fa fa-eye"></i></a></li>
+                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i
+                                class="fa fa-sync"></i></a></li>
+                    <li><a href="#" data-toggle="tooltip" data-placement="right"
+                            title="Add to Wishlist"><i class="fa fa-heart"></i></a></li>
+                </ul>
+                <a class="cart" href="{% url 'product_detail' p.category.slug p.slug %}">View</a>
+            </div>
+        </div>
+        <div class="card-content">
+            <p class="title is-5 is-capitalized">{{ p.title }}</p>
+            <p class="subtitle is-6">₹ {{ p.price }}</p>
+        </div>
+    </div>
+
+
+</div>
+{% endfor %}
+</div-->

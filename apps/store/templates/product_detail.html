@@ -38,7 +38,7 @@
 
 
         {% if product.description %}
-            <p class="is-capitalized mb-2">Desc :{{ product.description }}</p>
+            <p class="mb-2">Desc :{{ product.description|slice:100 }}</p>
         {% endif %}
 
         
