@@ -32,12 +32,12 @@
 
     <body>
         <div class="wrapper">
-            <h1>Invoice #{{ order.id }}</h1>
+            <h1>Invoice #{{ order.id }} {{order.created_at}}</h1>
 
             <h2>Shipping address</h2>
 
             <p>
-                {{ order.first_name }} {{ order.last_name }}<br>
+                <span class="title has-text-capitalalized">{{ order.first_name }} {{ order.last_name }}</span><br>
                 {{ order.address }}<br>
                 {{ order.zipcode }} {{ order.place }}
             </p>
@@ -57,12 +57,12 @@
                     <tr class="item">
                         <td>
                             {% if item.product.thumbnail.url %}
-                                <img src="http://127.0.0.1:8000{{ item.product.get_thumbnail }}" width="40">
+                                <img src="http://www.myfarmersnest.com{{ item.product.get_thumbnail }}" width="40">
                             {% endif %}
                         </td>
                         <td>{{ item.product.title }}</td>
                         <td>{{ item.product.price }}</td>
-                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.quantity }} x {{ item.variant }}</td>
                         <td>{{ item.price }}</td>
                     </tr>
                 {% endfor %}

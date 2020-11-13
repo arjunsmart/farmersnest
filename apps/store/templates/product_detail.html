@@ -32,7 +32,11 @@
         <div class="column">
             <div style="text-align: center;">
         <h1 class="title">{{ product.title }}</h1>
-        <h2 class="subtitle">₹{{ product.price|intcomma }} </h2>
+        <p class="subtitle is-4">₹ {{ product.price }}
+            {% if product.variant %}                                         
+        <span class="subtitle is-6">/{{ product.variant }}</span>
+                    {% endif %}
+        </p>
     <p><i class="fa fa-star"></i>Ratings : {% if product.get_rating == 0 %}No ratings yet{% else %}{{ product.get_rating|floatformat:1 }}/5.0{% endif %}
      <span><div class="views"><i class="fa fa-eye"></i> {{ product.num_visits}}</div></span></p>
 

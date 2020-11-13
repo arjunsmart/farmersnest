@@ -27,14 +27,14 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    variant = models.CharField(max_length=255, blank=True, null=True) 
     is_featured = models.BooleanField(default=False)
-    num_available = models.IntegerField(default=1)
-    num_visits = models.IntegerField(default=0)
-    last_visit = models.DateTimeField(blank=True, null=True)
-
     image = models.ImageField(upload_to='uploads/', blank=True, null=True)
     thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
+    num_available = models.IntegerField(default=1)
+    num_visits = models.IntegerField(default=0)
+    last_visit = models.DateTimeField(blank=True, null=True)    
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:

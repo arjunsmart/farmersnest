@@ -35,7 +35,7 @@
                             <tr  class="mb-2" v-for="product in products">
                                 <td>
                                     <figure class="image is-48x48">
-                                        <img :src="product.thumbnail">
+                                        <img :src="product.get_thumbnail">
                                     </figure>
                                 </td>
                                 <td>
@@ -43,7 +43,7 @@
                                         [[ product.title ]]
                                     </a>
                                 </td>
-                                <td><button @click="decrementQuantity(product.id, product.quantity, product.price)">-</button> [[ product.quantity ]] <button @click="incrementQuantity(product.id, product.quantity, product.price)">+</button></td>
+                                <td><button @click="decrementQuantity(product.id, product.quantity, product.price)">-</button> [[ product.quantity ]] x [[product.]] <button @click="incrementQuantity(product.id, product.quantity, product.price)">+</button></td>
                                 <td>[[ product.total_price ]]</td>
                                 
                                 <td><button @click="removeFromCart(product.id)" class="button is-danger"><i class="fa fa-trash"></i></button></td>
