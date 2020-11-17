@@ -3,6 +3,9 @@
 {% block title %}Cart | {% endblock %}
 
 {% block content %}
+<style>
+    #more {display: none;}
+</style>
 <div class="container">
     <div id="cartapp">
     <div class="columns ">           
@@ -162,12 +165,35 @@
                         </div>
                     </div>
                 </div>
-                
+                <p class="subtitle">Our service areas</p>
+                <div class="control mb-2">
+                    <label class="radio">
+                      <input type="radio" name="rsvp" checked>
+                      WhiteField
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="rsvp">
+                      Kadugudi
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="rsvp">
+                      Vartur
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="rsvp">
+                        Gunjur
+                      </label>
+                      <label class="radio">
+                        <input type="radio" name="rsvp">
+                        Panathur
+                      </label>
+                  </div>
+                 
                 <div class="field">
                     <div class="control has-text-centered ">
                         
                         <!--button class="button is-primary is-hidden" v-on:click="buy('stripe')">Pay with stripe</button-->
-                        <button   class="button is-primary " v-on:click="buy('razorpay')">Pay with razorpay</button>
+                        <button   class="button is-primary " v-on:click="buy('razorpay')">Pay Now</button>
                     </div>
                 </div>
                 <div v-if="errors.length > 0">
@@ -406,8 +432,8 @@
                                 'key': '{{ pub_key_razorpay }}',
                                 'amount': amount,
                                 'currency': 'INR',
-                                'name': 'Saul Gadgets',
-                                'description': 'A cool gadget store',
+                                'name': 'Farmesrs Nest',
+                                'description': 'A Organic Store',
                                 'order_id': order_id,
                                 'handler': function(res) {
                                     console.log('Handler');
@@ -573,4 +599,21 @@
         }
     });
 </script>
+<script>
+function myFunction() {
+    var dots = document.getElementById("dots");
+    var moreText = document.getElementById("more");
+    var btnText = document.getElementById("myBtn");
+  
+    if (dots.style.display === "none") {
+      dots.style.display = "inline";
+      btnText.innerHTML = "Read more"; 
+      moreText.style.display = "none";
+    } else {
+      dots.style.display = "none";
+      btnText.innerHTML = "Ok"; 
+      moreText.style.display = "inline";
+    }
+  }
+  </script>
 {% endblock %}
