@@ -27,16 +27,44 @@ def admin_order_shipped(modeladmin, request, queryset):
     return 
 admin_order_shipped.short_description = 'Set shipped'
 
+def admin_order_arrived(modeladmin, request, queryset):
+    for order in queryset:
+        order.arrived_date = datetime.datetime.now()
+        order.status = Order.ARRIVED
+        order.save()
+
+        html = render_to_string('order_sent.html', {'order': order})
+        send_mail('Order arrived', 'Your order has been arrived!', 'noreply@myfarmersnest.com', ['mail@myfarmersnest.com', order.email], fail_silently=False, html_message=html)
+    return 
+admin_order_arrived.short_description = 'Set arrived'
+
+def admin_order_notpaid(modeladmin, request, queryset):
+    for order in queryset:
+        order.notpaid_date = datetime.datetime.now()
+        order.status = Order.NOTPAID
+        order.save()
+
+        #html = render_to_string('order_sent.html', {'order': order})
+        #send_mail('Order notpaidyet', 'Your order has been notpaid yet!', 'noreply@myfarmersnest.com', ['mail@myfarmersnest.com', order.email], fail_silently=False, html_message=html)
+    return 
+admin_order_notpaid.short_description = 'Set notpaid'
+
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     raw_id_fields = ['product']
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['id', order_name, 'status', 'created_at', order_pdf]
+    list_display = ['id', order_name, 'status', 'created_at', order_pdf,'paid', 'paid_amount']
     list_filter = ['created_at', 'status']
     search_fields = ['first_name', 'address']
     inlines = [OrderItemInline]
-    actions = [admin_order_shipped]
+    actions = [admin_order_shipped, admin_order_arrived, admin_order_notpaid]
+
+
+class OrderItemAdmin(admin.ModelAdmin):
+    model = Order
+    list_display = ['id', 'order','product', 'quantity', 'price']
+    list_filter = ['order']
 
 admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderItem)
+admin.site.register(OrderItem, OrderItemAdmin)

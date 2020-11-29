@@ -7,11 +7,13 @@ class Order(models.Model):
     ORDERED = 'ordered'
     SHIPPED = 'shipped'
     ARRIVED = 'arrived'
+    NOTPAID = 'notpaid'
 
     STATUS_CHOICES = (
         (ORDERED, 'Ordered'),
         (SHIPPED, 'Shipped'),
-        (ARRIVED, 'Arrived')
+        (ARRIVED, 'Arrived'),
+        (NOTPAID, 'Notpaid')
     )
 
     user = models.ForeignKey(User, related_name='orders', on_delete=models.SET_NULL, blank=True, null=True)

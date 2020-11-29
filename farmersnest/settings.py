@@ -1,6 +1,12 @@
+# Razor pay live credentails
 
 RAZORPAY_API_KEY_PUBLISHABLE = 'rzp_live_JDdaFFEnzl5E0k'
 RAZORPAY_API_KEY_HIDDEN = '1tRyttAAMjU3MjtQjrv48RaM'
+
+# Razor pay test credentails
+
+# RAZORPAY_API_KEY_PUBLISHABLE = 'rzp_test_yXRx5KMNXszyBZ'
+# RAZORPAY_API_KEY_HIDDEN = 'M7UOx3sp90nOyppE1I0sJBo3'
 
 
 
@@ -27,7 +33,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'w(usn!n0dl=p5uhdwgo=n2d9@pb+)y0k63)2v9h447x7m)dw1f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -151,3 +158,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+# #EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+# EMAIL_HOST = 'smtp.zoho.in'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# # EMAIL_USE_SSL = False
+# EMAIL_HOST_USER = 'noreply@myfarmersnest.com'
+# EMAIL_HOST_PASSWORD = ''
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# REQUIRE_AUTHENTICATION = True

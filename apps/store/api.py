@@ -43,7 +43,7 @@ def validate_payment(request):
         order.save()
 
         decrement_product_quantity(order)
-        #send_order_confirmation(order)
+        send_order_confirmation(order)
 
     return JsonResponse({'success': True})
 

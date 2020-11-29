@@ -126,7 +126,8 @@ form ul:not(.errorlist) {
     background: #ffcd06;
     color:  rgba(255, 255, 255);
     border: 0.05px solid #ffcd06;
-    transition: all 0.3s linear;    
+    transition: all 0.3s linear;
+    margin-bottom: 0.5rem!important;    
   }
   .banner-btn:hover {
     background: transparent;
@@ -191,6 +192,7 @@ article p {
 }
 .card-content {
     text-align: center;
+    padding: 0.5rem;
 }
 
 table td .image img {

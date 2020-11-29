@@ -32,14 +32,15 @@
 
     <body>
         <div class="wrapper">
-            <h1>Invoice #{{ order.id }} {{order.created_at}}</h1>
+            <h1> Order Details #{{ order.id }} {{order.created_at}}</h1>
 
             <h2>Shipping address</h2>
 
             <p>
                 <span class="title has-text-capitalalized">{{ order.first_name }} {{ order.last_name }}</span><br>
                 {{ order.address }}<br>
-                {{ order.zipcode }} {{ order.place }}
+                 {{ order.place }}-{{ order.zipcode }},
+                 {{order.phone}}
             </p>
 
             <h2>Products</h2>
@@ -62,7 +63,7 @@
                         </td>
                         <td>{{ item.product.title }}</td>
                         <td>{{ item.product.price }}</td>
-                        <td>{{ item.quantity }} x {{ item.variant }}</td>
+                        <td>{{ item.quantity }} x {{ item.price }}</td>
                         <td>{{ item.price }}</td>
                     </tr>
                 {% endfor %}
