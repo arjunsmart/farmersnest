@@ -18,10 +18,9 @@
                 </h1>
                 <h2 class="subtitle banner-btn">
                     A Group of Organic Farmers
-                    <br>
-                    
-                </h2>
-                <p>Door delivery service only Tuesday & Friday</p>
+               </h2>
+               <h6 class="is-size-6-mobile">Door delivery service only Tuesday & Friday</h6>
+                <!-- <h6 class="is-6-mobile">Door delivery service only Tuesday & Friday<h6> -->
             </div>
         </div>
         </div>
@@ -37,25 +36,6 @@
     {% endwith %}
 
     <hr>
-
-    <div class="featured-categories">
-        
-        {% for category in featured_categories %}
-        {% if category in featured_categories %}
-            <h2 class="subtitle has-text-centered">{{ category.title }}</h2>
-            
-        
-            {% with category.products.all|slice:":4" as list_products %}
-                {% include 'parts/product_list.html' %}
-                
-            {% endwith %}
-            {% endif %}    
-        {% endfor %}
-        
-    </div>
-
-
-
 <h2 class="subtitle has-text-centered">Popular products</h2>
 
 {% with popular_products as list_products %}

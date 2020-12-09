@@ -38,8 +38,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'cart'
@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'import_export',
+    'rangefilter',
 
     'apps.cart',
     'apps.coupon',
@@ -139,13 +141,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -160,12 +162,19 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
-# #EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-# EMAIL_HOST = 'smtp.zoho.in'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# # EMAIL_USE_SSL = False
-# EMAIL_HOST_USER = 'noreply@myfarmersnest.com'
+# EMAIL_HOST ='smtp.gmail.com'
+# EMAIL_PORT =587
+# EMAIL_USE_TLS =True
+# EMAIL_HOST_USER ='knagaraju1980@gmail.com'
 # EMAIL_HOST_PASSWORD = ''
-# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-# REQUIRE_AUTHENTICATION = True
+
+EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST = 'smtp.zoho.in'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'noreply@myfarmersnest.com'
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+REQUIRE_AUTHENTICATION = True

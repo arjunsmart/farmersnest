@@ -48,6 +48,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, related_name='items', on_delete=models.DO_NOTHING)
     price = models.FloatField()
     quantity = models.IntegerField(default=1)
+    added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return '%s' % self.id

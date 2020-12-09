@@ -47,7 +47,7 @@
 
             <table cellpadding="0" cellspacing="0">
                 <tr class="head">
-                    <td></td>
+                    <td>#</td>
                     <td>Name</td>
                     <td>Price</td>
                     <td>Quantity</td>
@@ -57,9 +57,10 @@
                 {% for item in order.items.all %}
                     <tr class="item">
                         <td>
-                            {% if item.product.thumbnail.url %}
+                            <!-- {% if item.product.thumbnail.url %}
                                 <img src="http://www.myfarmersnest.com{{ item.product.get_thumbnail }}" width="40">
-                            {% endif %}
+                            {% endif %} -->
+                            {{ forloop.counter }}
                         </td>
                         <td>{{ item.product.title }}</td>
                         <td>{{ item.product.price }}</td>
@@ -78,6 +79,7 @@
             <h2>Farmer's Nest</h2>
 
             <p>Thanks for ordering from us!</p>
+            <p>Contact us: contact@myfarmersnest.com</p>
         </div>
     </body>
 </html>

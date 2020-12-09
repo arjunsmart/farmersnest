@@ -65,6 +65,9 @@
                                 <td class="is-capitalized">
                                     {{ product.title }}
                                 </td>
+                                <td>
+                                {{ product.price }}
+                                </td>
 
                                 <td>
                                     {% if product.in_cart %}
@@ -73,7 +76,7 @@
                                         {% if product.num_available > 0 %}
                                             <button @click="addToCart({{ product.id }})" class="button is-success has-text-centered"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                                         {% else %}
-                                            <p>The product is out of stock!</p>
+                                        <button class="button is-warning">Out of stock</button>
                                         {% endif %}
                                     {% endif %}
                                 </td>
@@ -81,6 +84,7 @@
 
                             {% for variant in product.variants.all %}
                                 <tr>
+                                    
                                     <td>
                                         <figure class="image is-48x48">
                                             {% if variant.thumbnail.url %}
@@ -94,13 +98,17 @@
                                     </td>
 
                                     <td>
+                                        {{variant.price}}
+                                    </td>
+
+                                    <td>
                                         {% if variant.in_cart %}
                                         <button class="button is-warning">In Cart</button>
                                         {% else %}
                                             {% if variant.num_available > 0 %}
                                                 <button @click="addToCart({{ variant.id }})" class="button is-success has-text-centered"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                                             {% else %}
-                                                <p>The product is out of stock!</p>
+                                            <button class="button is-warning">Out of stock</button>
                                             {% endif %}
                                         {% endif %}
                                     </td>
@@ -118,7 +126,7 @@
                 {% if product.num_available > 0 %}
                     <button  style="text-align: center;" @click="addToCart({{ product.id }})" class="button is-success"><i class="fa fa-shopping-cart"></i>Add to cart</button>
                 {% else %}
-                    <p>The product is out of stock!</p>
+                <button class="button is-warning">Out of stock</button>
                 {% endif %}
             {% endif %}
         {% endif %}
@@ -262,7 +270,7 @@
 
                     setTimeout(() => {
                         this.showMessage = false
-                    }, 2000)
+                    }, 200)
                 })
                 .catch(function (error) {
                     console.log('Error 2');

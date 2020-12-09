@@ -5,6 +5,8 @@ from django.contrib import admin
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
+from import_export.admin import ImportExportModelAdmin
+from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
 from .models import Order, OrderItem
 
@@ -23,7 +25,7 @@ def admin_order_shipped(modeladmin, request, queryset):
         order.save()
 
         html = render_to_string('order_sent.html', {'order': order})
-        send_mail('Order sent', 'Your order has been sent!', 'noreply@myfarmersnest.com', ['mail@myfarmersnest.com', order.email], fail_silently=False, html_message=html)
+        send_mail('Order sent', 'Your order has been shipped!', 'noreply@myfarmersnest.com', [order.email], fail_silently=False, html_message=html)
     return 
 admin_order_shipped.short_description = 'Set shipped'
 
@@ -34,7 +36,7 @@ def admin_order_arrived(modeladmin, request, queryset):
         order.save()
 
         html = render_to_string('order_sent.html', {'order': order})
-        send_mail('Order arrived', 'Your order has been arrived!', 'noreply@myfarmersnest.com', ['mail@myfarmersnest.com', order.email], fail_silently=False, html_message=html)
+        send_mail('Order arrived', 'Your order has been arrived!', 'noreply@myfarmersnest.com', [order.email], fail_silently=False, html_message=html)
     return 
 admin_order_arrived.short_description = 'Set arrived'
 
@@ -61,10 +63,11 @@ class OrderAdmin(admin.ModelAdmin):
     actions = [admin_order_shipped, admin_order_arrived, admin_order_notpaid]
 
 
-class OrderItemAdmin(admin.ModelAdmin):
-    model = Order
-    list_display = ['id', 'order','product', 'quantity', 'price']
-    list_filter = ['order']
+
+@admin.register(OrderItem)
+class OrderItemImportExport(ImportExportModelAdmin):    
+    list_display = ['id','order', 'product', 'quantity', 'price']
+    list_filter = [('added_at',DateRangeFilter), 'added_at']
+    pass
 
 admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderItem, OrderItemAdmin)
