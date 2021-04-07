@@ -35,7 +35,7 @@ def admin_order_arrived(modeladmin, request, queryset):
         order.status = Order.ARRIVED
         order.save()
 
-        html = render_to_string('order_sent.html', {'order': order})
+        html = render_to_string('order_arrived.html', {'order': order})
         send_mail('Order arrived', 'Your order has been arrived!', 'noreply@myfarmersnest.com', [order.email], fail_silently=False, html_message=html)
     return 
 admin_order_arrived.short_description = 'Set arrived'

@@ -14,11 +14,11 @@
                             <p class="title is-size-6 is-capitalized mb-3">{{ p.title }}</p>
                             <p class="subtitle is-size-6 mb-1">₹ {{ p.price }}
                                 {% if p.variant %}                                         
-                            <span class="subtitle is-6">/{{ p.variant }}</span>
-                                        {% endif %}
+                            <span class="subtitle is-6">/{{ p.variant }} </span>
+                                        
                             </p>
-                            {% if p.num_available > 0 %}
-                                            <p>Available</p>
+                            
+                                            <p>Available({{ p.num_available }})</p>
                                         {% else %}
                                             <p> No Stock</p>
                                         {% endif %}

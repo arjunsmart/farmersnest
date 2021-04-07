@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'import_export',
     'rangefilter',
+    'mathfilters',
 
     'apps.cart',
     'apps.coupon',

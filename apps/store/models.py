@@ -29,7 +29,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True)
     price = models.FloatField()
     variant = models.CharField(max_length=255, blank=True, null=True) 
-    is_featured = models.BooleanField(default=False)
+    is_featured = models.BooleanField(default=True)
     image = models.ImageField(upload_to='uploads/', blank=True, null=True)
     thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
     num_available = models.IntegerField(default=1)
@@ -38,7 +38,7 @@ class Product(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('-date_added',)
+        ordering = ('title',)
 
     def __str__(self):
         return self.title

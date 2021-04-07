@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container">
     <h1 class="title">My account</h1>
 
     <a href="{% url 'logout' %}" class="button is-danger">Log out</a>
@@ -40,7 +41,7 @@
                         {% for item in order.items.all %}
                             <tr>
                                 <td>{{ item.product.title }}</td>
-                                <td>{{ item.quantity }} x {{item.variant}}</td>
+                                <td>{{ item.quantity }}</td>
                                 <td>{{ item.price }}</td>
                             </tr>
                         {% endfor %}
@@ -59,4 +60,5 @@
     {% empty %}
         <p>You don't have any order yet...</p>
     {% endfor %}
+</div>
 {% endblock %}

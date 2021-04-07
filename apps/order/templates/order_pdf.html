@@ -1,3 +1,4 @@
+{% load mathfilters %}
 <!DOCTYPE html>
 
 <html>
@@ -64,8 +65,8 @@
                         </td>
                         <td>{{ item.product.title }}</td>
                         <td>{{ item.product.price }}</td>
-                        <td>{{ item.quantity }} x {{ item.price }}</td>
-                        <td>{{ item.price }}</td>
+                        <td>{{ item.quantity }} x {{ item.product.price }}</td>
+                        <td>{{ item.price|mul:item.quantity}}</td>
                     </tr>
                 {% endfor %}
 

@@ -38,6 +38,7 @@
                             <tr  class="mb-2" v-for="product in products">
                                 <td>
                                     <figure class="image is-48x48">
+                                        <!-- <img src="{{ product.thumbnail.url }}"> -->
                                         <img :src="product.thumbnail">
                                     </figure>
                                 </td>
@@ -166,7 +167,7 @@
                     </div>
                 </div>
                 <p class="subtitle">Our service areas</p>
-                <div class="control mb-2">
+                <div class="has-text-centered control mb-2">
                     <label class="radio">
                       <input type="radio" name="rsvp" checked>
                       WhiteField
@@ -188,6 +189,7 @@
                         Panathur
                       </label>
                   </div>
+                  <p class="subtitle has-text-centered has-text-info-dark">I'm Placing order for coming Friday</p>
                  
                 <div class="field">
                     <div class="control has-text-centered ">
@@ -222,9 +224,9 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="application/javascript" src="https://js.stripe.com/v3/"></script>
+<!--script type="application/javascript" src="https://js.stripe.com/v3/"></script-->
 <script type="application/javascript" src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script type="application/javascript" src="https://www.paypal.com/sdk/js?client-id={{ pub_key_paypal }}"></script>
+<!--script type="application/javascript" src="https://www.paypal.com/sdk/js?client-id={{ pub_key_paypal }}"></script-->
 <script>
     var productapp = new Vue({
         el: '#cartapp',
@@ -310,8 +312,9 @@
             },
             totalCostWithCoupon: function() {
                 if (this.coupon_value > 0) {
-                    return store.state.totalCost * (parseInt(this.coupon_value) / 100);
-                } else {
+                    return(store.state.totalCost) * (parseInt(this.coupon_value)/100);
+                } 
+                else {
                     return store.state.totalCost;
                 }
             }
@@ -462,7 +465,7 @@
                                     });
                                 },
                                 'prefill': {
-                                    'name': data.first_name + ' ' + data.last_name,
+                                    'name': data.first_name,
                                     'email': data.email,
                                     'contact': data.phone
                                 },
