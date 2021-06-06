@@ -55,8 +55,18 @@
 						
 						<span class="flash" data-flash-spped="1000">				
 							{% for coupon in menu_coupons %}
+
+							{% if coupon.active %}
+							
 							<span><i class="fa fa-opencart"></i>{{ coupon.code }}</span>
+							{% else %}
+
+							<span><i class="fa fa-opencart"></i>No Coupons</span>
+
+							{% endif %}
+							
 							{% endfor %}
+							
 							<!--span>FIRST20</span>
 							<span>REF20</span>
 							<span>All5</span-->

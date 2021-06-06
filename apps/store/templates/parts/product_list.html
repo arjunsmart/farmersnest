@@ -1,5 +1,6 @@
 <div class="columns is-multiline is-mobile">
     {% for p in list_products %}
+    {% if p.num_available > 0 %}
     <div class="column is-2-desktop is-6-mobile">
             <div class="card">
                 <div class="card-image">
@@ -17,10 +18,11 @@
                             <span class="subtitle is-6">/{{ p.variant }} </span>
                                         
                             </p>
-                            
+                            {% if p.num_available > 0 %}
                                             <p>Available({{ p.num_available }})</p>
                                         {% else %}
                                             <p> No Stock</p>
+                                            {% endif %}
                                         {% endif %}
                         </div>
                     
@@ -32,6 +34,7 @@
                 </footer-->
             </div>
         </div>
+        {% endif %}
     {% endfor %}
 </div>
 

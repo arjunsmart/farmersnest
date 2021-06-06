@@ -98,6 +98,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'apps.store.context_processors.menu_categories',
+                'apps.coupon.context_processors.menu_coupons',
                 'apps.cart.context_processors.cart'
             ],
         },
@@ -155,7 +156,10 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+#Production
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#Development
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static')
 # ]
